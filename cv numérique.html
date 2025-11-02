@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benjamin Ack - Développeur junior </title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cod-dark: #0d1b2a;
+            --cod-blue: #1b263b;
+            --cod-accent: #415a77;
+            --cod-light: #778da9;
+            --cod-highlight: #e0e1dd;
+            --cod-red: #d90429;
+            --cod-gold: #ffd700;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--cod-dark), var(--cod-blue));
+            color: var(--cod-highlight);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Intro avec effet Call of Duty */
+        .cod-intro {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: radial-gradient(circle at center, var(--cod-blue) 0%, var(--cod-dark) 70%);
+        }
+        
+        .cod-intro::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23000" fill-opacity="0.2" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+        
+        .intro-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .cod-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--cod-highlight);
+            text-shadow: 0 0 10px rgba(224, 225, 221, 0.5);
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .cod-subtitle {
+            font-size: 1.5rem;
+            color: var(--cod-gold);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .cod-tagline {
+            font-size: 1.2rem;
+            color: var(--cod-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--cod-highlight);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+        
+        /* Sections de contenu */
+        .cv-section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--cod-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--cod-red);
+        }
+        
+        /* Carte de profil */
+        .profile-card {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--cod-red);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--cod-accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Compétences */
+        .skill-item {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--cod-accent);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: rgba(65, 90, 119, 0.8);
+            transform: translateX(5px);
+        }
+        
+        .skill-title {
+            font-size: 1.2rem;
+            color: var(--cod-gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Projets */
+        .project-card {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-header {
+            background: var(--cod-accent);
+            padding: 1rem;
+            color: var(--cod-highlight);
+        }
+        
+        .project-body {
+            padding: 1.5rem;
+        }
+        
+        /* Section Sons */
+        .audio-section {
+            background: rgba(13, 27, 42, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--cod-accent);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .audio-player {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--cod-red);
+            transition: all 0.3s ease;
+        }
+        
+        .audio-player:hover {
+            transform: translateY(-5px);
+            background: rgba(65, 90, 119, 0.8);
+        }
+        
+        .audio-title {
+            color: var(--cod-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .play-btn {
+            background: var(--cod-red);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            background: #ff1a40;
+            transform: scale(1.1);
+        }
+        
+        .progress-container {
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--cod-gold);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .time-display {
+            font-size: 0.9rem;
+            color: var(--cod-light);
+            min-width: 100px;
+            text-align: right;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .volume-slider {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--cod-gold);
+            cursor: pointer;
+        }
+        
+        /* Loisirs */
+        .hobby-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .hobby-icon {
+            font-size: 2.5rem;
+            color: var(--cod-gold);
+            margin-bottom: 1rem;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px rgba(224, 225, 221, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(224, 225, 221, 0.8), 0 0 30px rgba(224, 225, 221, 0.6); }
+            100% { text-shadow: 0 0 10px rgba(224, 225, 221, 0.5); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cod-title {
+                font-size: 2.5rem;
+            }
+            
+            .cod-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .audio-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .time-display {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro style Call of Duty -->
+    <section class="cod-intro">
+        <div class="intro-content">
+            <h1 class="cod-title">Benjamin</h1>
+            <h2 class="cod-subtitle">Développeur junior</h2>
+            <p class="cod-tagline">jeune développeur, spécialisé dans le développement web et la création d'applications web innovantes.</p>
+            <a href="#profil" class="btn btn-outline-warning btn-lg">Explorer 😎</a>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Section Profil -->
+    <section id="profil" class="cv-section">
+        <div class="container">
+            <h2 class="section-title">Profil</h2>
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center">
+                    <img src="1.jpg" alt="Photo de profil" class="profile-img">
+                    <div class="mt-3">
+                        <a href="https://github.com/ackwemezuibenjaminemmanuel-byte/Ma_page_web" class="btn btn-outline-light">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="profile-card">
+                        <p>Bonjour à vous, je m'appelle Benjamin et j'ai 17 ans.</p>
+                        <p>Je suis un développeur junior passionné par le monde du développement web et la création d'applications web innovantes. Depuis mon plus jeune âge, j'ai toujours été fasciné par la technologie et la manière dont elle peut transformer notre quotidien.</p>
+                        <p>Au fil des années, j'ai acquis des compétences solides en HTML, CSS, JavaScript, et Python, ce qui m'a permis de réaliser divers projets personnels et scolaires.</p>
+                        <p>Je suis constamment à la recherche de nouvelles opportunités pour apprendre et grandir en tant que développeur. Mon objectif est de contribuer à des projets significatifs qui ont un impact positif sur la société.</p>
+                        <p>Ack_tech est une initiative qui permettra de dévoiler à la jeunesse de mon pays que l'un des piliers de l'avenir de notre pays se trouve dans des lignes de code.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Compétences -->
+    <section id="competences" class="cv-section bg-dark">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="skill-item">
+                        <h3 class="skill-title">Développement Web</h3>
+                        <p>HTML, CSS, JavaScript, Bootstrap, </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="skill-item">
+                        <h3 class="skill-title">Langages de Programmation</h3>
+                        <p> JavaScript, PHP</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="skill-item">
+                        <h3 class="skill-title">Création d'Applications</h3>
+                        <p>Développement d'applications web, création de bots WhatsApp, assistants artificiels</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="skill-item">
+                        <h3 class="skill-title">Design & Créativité</h3>
+                        <p> création d'interfaces utilisateur, illustration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Sons & Ambiance -->
+    <section id="sons" class="cv-section">
+        <div class="container">
+            <h2 class="section-title">Sons & Ambiance</h2>
+            <div class="audio-section">
+                <p class="text-center mb-4">Découvrez une sélection de sons et musiques qui m'inspirent dans mon travail créatif.</p>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="audio-player">
+                            <h3 class="audio-title">Ambiance Électronique</h3>
+                            <div class="audio-controls">
+                                <button class="play-btn" data-audio="audio1">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <div class="progress-container" data-audio="audio1">
+                                    <div class="progress-bar" data-audio="audio1"></div>
+                                </div>
+                                <div class="time-display" data-audio="audio1">0:00 / 0:00</div>
+                            </div>
+                            <div class="volume-control">
+                                <i class="fas fa-volume-up text-warning"></i>
+                                <input type="range" class="volume-slider" min="0" max="100" value="70" data-audio="audio1">
+                            </div>
+                        </div>
+                        
+                        <div class="audio-player">
+                            <h3 class="audio-title">Musique de Codage</h3>
+                            <div class="audio-controls">
+                                <button class="play-btn" data-audio="audio2">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <div class="progress-container" data-audio="audio2">
+                                    <div class="progress-bar" data-audio="audio2"></div>
+                                </div>
+                                <div class="time-display" data-audio="audio2">0:00 / 0:00</div>
+                            </div>
+                            <div class="volume-control">
+                                <i class="fas fa-volume-up text-warning"></i>
+                                <input type="range" class="volume-slider" min="0" max="100" value="70" data-audio="audio2">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="audio-player">
+                            <h3 class="audio-title">Sons Naturels</h3>
+                            <div class="audio-controls">
+                                <button class="play-btn" data-audio="audio3">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <div class="progress-container" data-audio="audio3">
+                                    <div class="progress-bar" data-audio="audio3"></div>
+                                </div>
+                                <div class="time-display" data-audio="audio3">0:00 / 0:00</div>
+                            </div>
+                            <div class="volume-control">
+                                <i class="fas fa-volume-up text-warning"></i>
+                                <input type="range" class="volume-slider" min="0" max="100" value="70" data-audio="audio3">
+                            </div>
+                        </div>
+                        
+                        <div class="audio-player">
+                            <h3 class="audio-title">Thème Call of Duty</h3>
+                            <div class="audio-controls">
+                                <button class="play-btn" data-audio="audio4">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <div class="progress-container" data-audio="audio4">
+                                    <div class="progress-bar" data-audio="audio4"></div>
+                                </div>
+                                <div class="time-display" data-audio="audio4">0:00 / 0:00</div>
+                            </div>
+                            <div class="volume-control">
+                                <i class="fas fa-volume-up text-warning"></i>
+                                <input type="range" class="volume-slider" min="0" max="100" value="70" data-audio="audio4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-muted">Ces sons représentent différentes ambiances qui m'accompagnent pendant mes sessions de développement et de création.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projets" class="cv-section bg-dark">
+        <div class="container">
+            <h2 class="section-title">Projets pour l'Avenir</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Système d'Analyse de Données</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>Création d'un système complet d'analyse et de gestion des données pour entreprises et organisations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Portfolio Professionnel</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>Développement d'un portfolio interactif à usage professionnel avec présentation de projets.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Chatbot Multiplateforme</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>Conception d'un chatbot intelligent fonctionnant sur différentes plateformes de messagerie.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Loisirs -->
+    <section id="loisirs" class="cv-section">
+        <div class="container">
+            <h2 class="section-title">Loisirs & Passions</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="hobby-item">
+                        <div class="hobby-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h4>Culture Manga & Otaku</h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="hobby-item">
+                        <div class="hobby-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h4>Dessin & Illustration</h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="hobby-item">
+                        <div class="hobby-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Culture Étrangère</h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="hobby-item">
+                        <div class="hobby-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h4>Gastronomie</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center" style="background-color: var(--cod-dark);">
+        <div class="container">
+            <p class="mb-0">© 2025 Benjamin- Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animation simple au défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.cv-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(section);
+            });
+
+            // Gestion des lecteurs audio
+            const audioPlayers = document.querySelectorAll('.audio-player');
+            
+            audioPlayers.forEach(player => {
+                const playBtn = player.querySelector('.play-btn');
+                const progressBar = player.querySelector('.progress-bar');
+                const progressContainer = player.querySelector('.progress-container');
+                const timeDisplay = player.querySelector('.time-display');
+                const volumeSlider = player.querySelector('.volume-slider');
+                const audioId = playBtn.getAttribute('data-audio');
+                
+                // Créer un élément audio simulé (dans un vrai projet, vous utiliseriez de vrais fichiers audio)
+                const audio = new Audio();
+                // Ces URLs sont des placeholders - dans un vrai projet, remplacez par vos fichiers audio
+                if(audioId === 'audio1') {
+                    audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+                } else if(audioId === 'audio2') {
+                    audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
+                } else if(audioId === 'audio3') {
+                    audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3';
+                } else if(audioId === 'audio4') {
+                    audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3';
+                }
+                
+                audio.volume = volumeSlider.value / 100;
+                
+                // Événements de lecture
+                playBtn.addEventListener('click', () => {
+                    if(audio.paused) {
+                        audio.play();
+                        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    } else {
+                        audio.pause();
+                        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                });
+                
+                // Mise à jour de la barre de progression
+                audio.addEventListener('timeupdate', () => {
+                    const progressPercent = (audio.currentTime / audio.duration) * 100;
+                    progressBar.style.width = `${progressPercent}%`;
+                    
+                    // Formatage du temps
+                    const formatTime = (time) => {
+                        const minutes = Math.floor(time / 60);
+                        const seconds = Math.floor(time % 60);
+                        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    };
+                    
+                    timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+                });
+                
+                // Clic sur la barre de progression pour changer la position
+                progressContainer.addEventListener('click', (e) => {
+                    const clickX = e.offsetX;
+                    const width = progressContainer.clientWidth;
+                    const duration = audio.duration;
+                    
+                    audio.currentTime = (clickX / width) * duration;
+                });
+                
+                // Contrôle du volume
+                volumeSlider.addEventListener('input', () => {
+                    audio.volume = volumeSlider.value / 100;
+                });
+                
+                // Réinitialiser quand l'audio se termine
+                audio.addEventListener('ended', () => {
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    progressBar.style.width = '0%';
+                    timeDisplay.textContent = '0:00 / 0:00';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
